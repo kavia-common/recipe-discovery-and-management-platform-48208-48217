@@ -1,3 +1,47 @@
+# Recipe Discovery App Frontend
+
+Modern React app for browsing, searching, and viewing recipe details. Follows the **Ocean Professional** style with a clean layout and responsive design.
+
+## Features
+
+- **Modern UI**: Minimalist Ocean Professional palette (`#2563EB`, `#F59E0B`, etc. - see src/theme.js), rounded corners, subtle shadows, smooth transitions
+- **Routing**: `/` for browse/search; `/recipe/:id` for details (react-router v6+)
+- **Sidebar**: Search and filter panel on desktop, collapsible on mobile
+- **Reusable Components**: `RecipeList`, `RecipeCard`, `FiltersPanel`, `SearchBar`, `RecipeDetail`
+- **Responsive**: Fluid layout with main/aside regions
+- **Mock Data/Live API**: Uses demo/mock data until `REACT_APP_API_BASE` is set in env
+
+## Quickstart
+
+```bash
+npm install
+npm start
+```
+App runs at [http://localhost:3000](http://localhost:3000).
+
+## App Structure
+
+- `src/components/`: All UI components
+  - `Header.js` - Navigation/header
+  - `RecipeList.js`, `RecipeCard.js` - Recipe browsing
+  - `RecipeDetail.js` - Recipe details view
+  - `SearchBar.js`, `FiltersPanel.js` - Sidebar
+- `src/pages/`: Routing views
+- `src/theme.js`: Exports theme colors/constants
+- `src/data/`: Demo/mock data
+
+## Theming
+
+- Colors set in `theme.js` (Ocean Professional: blue, amber, white, minimal accent red for errors)
+- CSS variables for easy theming, clean/app-specific overrides in `App.css`
+
+## Environment Variables
+
+Set `REACT_APP_API_BASE` to point to API. If not present, app uses local mock/demo data.
+
+----
+Original template documentation continues below.
+
 # Lightweight React Template for KAVIA
 
 This project provides a minimal React template with a clean, modern UI and minimal dependencies.
@@ -79,4 +123,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://reactjs.org/).

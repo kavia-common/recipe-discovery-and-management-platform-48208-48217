@@ -1,48 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import BrowsePage from "./pages/Browse";
+import RecipeDetailPage from "./pages/RecipeDetailPage";
+import { themeVars } from "./theme";
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
-  // Effect to apply theme to document element
+  // Set CSS vars for theme
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    Object.entries(themeVars({dark: theme === "dark"})).forEach(([k, v]) =>
+      document.documentElement.style.setProperty(k, v)
+    );
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   // PUBLIC_INTERFACE
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App" style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
+        <Header theme={theme} onToggleTheme={toggleTheme} />
+        <div style={{ maxWidth: 1220, margin: "32px auto", padding: "0 16px" }}>
+          <Routes>
+            <Route path="/" element={<BrowsePage />} />
+            <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
